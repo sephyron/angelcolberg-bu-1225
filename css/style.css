@@ -38,7 +38,8 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color: var(--text-color);
-  background-color: var(--bg-color);
+  /*background-color: var(--bg-color); */
+   background-image: linear-gradient(135deg, #f2f0ed 10%, #c7c5c2 100%);
   overflow-x: hidden;
   font-weight: 300;
 }
@@ -120,7 +121,7 @@ h1 {
 h2 {
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   margin-bottom: 1.5rem;
-  font-weight: 600;
+  font-weight: 400;
   position: relative;
 }
 
@@ -152,6 +153,52 @@ p {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 2rem;
+  height: 100%;
+}
+
+.glass {
+  --width: 100%;
+  width: var(--width);
+  height: var(--width);
+ 
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-right-color: rgba(255, 255, 255, 0.1);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+
+  overflow: hidden;
+ 
+
+}
+.glass, .glass * {
+  box-sizing: border-box;
+  transition: 200ms;
+}
+.glass:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  filter: blur(0px);
+  transition: 400ms;
+  transform: skewX(45deg) translateX(calc(var(--width) + 200%));
+}
+.glass:hover {
+  transform: translateY(-20px);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+
+}
+.glass:hover:before {
+  transform: skewX(45deg) translateX(calc(var(--width) * -1 - 200%));
+}
+.glass > * {
+  opacity: 0.6;
 }
 
 .btn {
@@ -164,7 +211,7 @@ p {
   font-family: var(--font-title);
   font-weight: 500;
   font-size: 15px;
-  transition: var(--transition-fast);
+  transition: var(--transition);
   letter-spacing: 0.03em;
   position: relative;
   overflow: hidden;
@@ -198,15 +245,15 @@ p {
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--header-height);
   background-color: var(--bg-color);
   z-index: 1000;
   transition: var(--transition-fast);
   border-bottom: 1px solid var(--border-color);
 }
 
-.site-header.scrolled {
-  height: 70px;
+.site-header:not(.scrolled) {
+   height: 70px;
+   transition: var(--transition-fast);
 }
 
 .site-header nav {
@@ -214,6 +261,7 @@ p {
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  transition: var(--transition-fast);
 }
 
 .logo {
@@ -348,13 +396,13 @@ p {
 
 .badge {
   display: inline-block;
-  background-color: var(--accent-color);
-  color: #fff;
+  color: var(--accent-color);
   font-family: var(--font-title);
-  font-weight: 500;
-  font-size: 14px;
-  padding: 8px 16px;
-  margin-bottom: 40px;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 8px 0px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
 
 .hero h1 .line {
@@ -375,7 +423,7 @@ p {
 
 .hero-subtitle strong {
   color: var(--text-color);
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .scroll-indicator {
@@ -410,13 +458,13 @@ p {
 
 .eyebrow {
   display: inline-block;
-  background-color: var(--accent-color);
-  color: #fff;
+  color: var(--accent-color);
   font-family: var(--font-title);
-  font-size: 14px;
-  font-weight: 500;
-  padding: 8px 16px;
-  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  font-weight: 900;
+  padding: 8px 0px;
+  margin-bottom: 1.0rem;
+  text-transform: uppercase;
 }
 
 .section-intro {
@@ -462,8 +510,6 @@ p {
 }
 
 .project-card-inner {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
   padding: 2rem;
   height: 100%;
   overflow: hidden;
@@ -474,7 +520,6 @@ p {
 
 .project-card:hover .project-card-inner {
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
 }
 
 .project-image {
@@ -710,14 +755,11 @@ p {
 .skill-card {
   position: relative;
   padding: 2rem;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
   transition: var(--transition);
 }
 
 .skill-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
 }
 
 .skill-card h3 {
@@ -745,12 +787,12 @@ p {
 }
 
 /* Articles Teaser Section */
-.articles-teaser {
+.thoughts-teaser {
   padding: var(--section-spacing) 0;
   border-top: 1px solid var(--border-color);
 }
 
-.articles-grid {
+.thoughts-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2.5rem;
@@ -760,6 +802,7 @@ p {
 .article-card {
   position: relative;
   transition: var(--transition);
+  padding: 1rem;
 }
 
 .article-card a {
@@ -778,8 +821,7 @@ p {
   flex-direction: column;
 }
 
-.article-card:hover .article-card-inner,
-.article-card a:hover {
+.article-card:hover {
   color: var(--text-color);
   transform: translateY(-10px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
@@ -840,7 +882,7 @@ p {
   transform: translateX(5px);
 }
 
-.view-all-articles {
+.view-all-thoughts {
   margin-top: 3rem;
   text-align: center;
 }
@@ -855,20 +897,20 @@ p {
 }
 
 /* Articles Page Styles */
-.articles-hero {
+.thoughts-hero {
   padding-top: calc(var(--header-height) + 80px);
   padding-bottom: 5rem;
 }
 
-.articles-hero h1 {
+.thoughts-hero h1 {
   margin-bottom: 1.5rem;
 }
 
-.articles-list {
+.thoughts-list {
   padding-bottom: var(--section-spacing);
 }
 
-.articles-page .articles-grid {
+.thoughts-page .thoughts-grid {
   grid-template-columns: repeat(2, 1fr);
 }
 
@@ -989,7 +1031,7 @@ p {
   font-family: var(--font-title);
 }
 
-.back-to-articles {
+.back-to-thoughts {
   color: var(--accent-color);
   font-family: var(--font-title);
   font-weight: 500;
@@ -1000,7 +1042,7 @@ p {
   transition: var(--transition);
 }
 
-.back-to-articles:hover {
+.back-to-thoughts:hover {
   transform: translateX(-5px);
 }
 
@@ -1166,11 +1208,11 @@ footer {
   }
   
   .project-grid,
-  .articles-grid {
+  .thoughts-grid {
     gap: 2rem;
   }
 
-  .articles-page .articles-grid {
+  .thoughts-page .thoughts-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -1192,7 +1234,7 @@ footer {
     gap: 3rem;
   }
   
-  .articles-grid {
+  .thoughts-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -1275,8 +1317,8 @@ footer {
     margin-top: 1rem;
   }
   
-  .articles-grid,
-  .articles-page .articles-grid {
+  .thoughts-grid,
+  .thoughts-page .thoughts-grid {
     grid-template-columns: 1fr;
   }
   
